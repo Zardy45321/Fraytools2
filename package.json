@@ -1,0 +1,51 @@
+{
+  "name": "Fraytools2",
+  "version": "1.0.0",
+  "description": "Fraytools 2",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+      "build": "electron-builder"
+  },
+  "author": "Zardy45321",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^29.2.0",
+    "electron-builder": "^25.0.0-alpha.9",
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "jquery": "^3.7.1",
+    "python-shell": "^5.0.0"
+  },
+  "build": {
+      "appId": "com.fraytools2.1",
+      "productName": "Fraytools2",
+      "directories": {
+        "buildResources": "assets"
+      },
+      "files": [
+        "dist/**/*",
+        "node_modules/**/*",
+        "package.json",
+        "favicon.png",
+        "main.js",
+        "index.html",
+        "assets/**/*",
+        "subpages/**/*",
+        "scripts/**/*"
+          
+      ],
+      "extraResources": [
+          {
+              "from": "scripts/exe/",
+              "to":"scripts/exe/",
+              "filter":["**/*"]
+          }
+      ],
+      "win": {
+        "icon": "favicon.png"
+      }
+  }
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel='stylesheet'  href='./assets/css/styles.css'>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <title>Fraytools 2</title>
+    </head>
+
+    <body>
+        
+        <div class='gear-container'>
+            <div class='gear-flex'>
+                <p id='gearMsg' class='g-desc'>Global Settings</p>
+                <p id='gHolder'></p>
+                <img id='gear' class='settings-gear' src='./assets/svg/Gear.svg'>
+            </div>
+        </div>
+        <br>
+        <div id='allContent' class='all-content'>
+        
+        
+        <div class="header">
+            <div class='header-text-cont'>
+                <h1 class='header-text'>Fraytools 2</h1>
+            </div>
+            <h3 clas='by'>By: Zardy Z</h3>
+            <p class='desc'>A cumulation of tools that I have created for Fraytools!</p>
+            
+        </div>
+        
+        <div id='main-content' class='program-chooser'>
+            <div class='pc-row'>
+                <div id='project-cleanup' class='pc-box'>
+                    <p class='pc-box-header'>Project Cleanup V1.0 100%</p>
+                    <p class='desc'>Cleans up un-used Sprites and Audio from Projects</p>
+                    <marquee class='kohaku' behavior="scroll" direction="right">
+                        <img style='width:75px' class='gif-hide' src='./assets/gifs/Kahaku Walk.gif'>
+                    </marquee>
+                </div>
+                <div id='color-conflict-resolver' class='pc-box'>
+                    <p class='pc-box-header'>Color Conflict Resolver 95%</p>
+                    <p class='desc'>Resolves R,G conflicts between colors in sprites and in the palette file</p>
+                </div>
+                <div id='mugen-importer' class='pc-box'>
+                    <p class='pc-box-header'>Mugen Importer 100%</p>
+                    <p class='desc'>Import animations and hurtbox/hitbox data from a Mugen project</p>
+                </div>
+            </div>
+            <div class='pc-row'>
+                <div id='advanced-auto-hurtboxer' class='pc-box'>
+                    <p class='pc-box-header'>Advanced Auto-Hurtboxer 75%</p>
+                    <p class='desc'>Uses AI to create better hurtboxes for the given sprites</p>
+                </div>
+                <div id='palette-preview' class='pc-box'>
+                    <p class='pc-box-header'>Palette Preview 80%</p>
+                    <p class='desc'>Generates a palette preview picture</p>
+                </div>
+                <div id='gif-importer' class='pc-box'>
+                    <p class='pc-box-header'>GIF Importer 100%</p>
+                    <p class='desc'>Import animations from a GIF</p>
+                </div>
+            </div>
+        
+        </div>
+        </div>
+        
+        <div id='settings' class='settings-hide'>
+            <p>Settings screen go here lol</p>
+        </div>
+        
+        <br>
+        <div class='main' style='display:none;'>
+            <div class='input-column'>
+                <br>
+                <div class='input-row'>
+                    <label class='input-label'>Please select the folder path that has the GIF(s): </label>
+                </div>
+                <button class='browse-button' id='input1' onclick="openFolder()">Select Folder</button>
+                <br>
+                <div class='input-row'>
+                    <label class='input-label'>Please select the folder that contains the Fraytools project:</label>
+                </div>
+                <button class='browse-button' id='input2' onclick="openFolder()">Select Folder</button>
+                <br>
+                <div class='input-row'>
+                    <button class="btn btn-success" onclick="importGifs()">Import GIFS</button>
+                </div>
+                <br>
+            </div>
+        </div>
+        <br>
+        <script src='./scripts/js/home.js'></script>
+    
+    </body>
+</html>

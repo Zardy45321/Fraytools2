@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel='stylesheet'  href='../assets/css/styles.css'>
+        <link rel='stylesheet'  href='../assets/css/gif-importer.css'>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <title>Fraytools GIF Importer</title>
+    </head>
+
+    <body>
+        <br>
+  
+        <div class="header">
+            <div class='header-text-cont'>
+                <h1 class='header-text'>GIF Importer V1.00</h1>
+            </div>
+            <p class='desc'>This program takes the provided GIFS and imports them into a Fraytools project</p>
+        </div>
+        
+        <div id='user-form' class='program-chooser'>
+            <div class='input-form'>
+                <p class='input-header'>Input Paths</p>
+                <div class='input-line'>
+                    <p class='input-label'>GIF Folder:</p>
+                    <button class='browse-button' id='input1' onclick="openFolderDialog('gifPath')">Select GIF Folder</button>
+                </div>
+
+                <div class='input-line'>
+                    <p id='gifPath' class='input-path'></p>
+                </div>
+
+                <div class='input-line'>
+                    <p class='input-label'>New Sprites Folder:</p>
+                    <button class='browse-button' id='input1' onclick="openFolderDialog('newSpritesPath')">Select New Sprites Folder</button>
+                </div>
+
+                <div class='input-line'>
+                    <p id='newSpritesPath' class='input-path'></p>
+                </div>
+
+                <div class='input-line'>
+                    <p class='input-label'>Entity File:</p>
+                    <button class='browse-button' id='input1' onclick="openFileDialog('entityPath')">Select .entity file</button>
+                </div>
+
+                <div class='input-line'>
+                    <p id='entityPath' class='input-path'></p>
+                </div>
+                <p class='input-header'>Frame Positioning</p>
+                <div class='frame-position-row'>
+                    <div class='frame-position-col'>
+                    
+                        <div class='fpos-line'>
+                            <p class='fpos-label'>X-Offset</p>
+                            <input id='x-Offset' class='fpos-number' type="number" value="0" onfocus="this.value=''">
+                        </div>
+                        <div class='input-spacer'></div>
+                        <div class='fpos-line'>
+                            <p class='fpos-label'>X Scale</p>
+                            <input id='xScale' class='fpos-number' type="number" value="1" onfocus="this.value=''">
+                        </div>
+                        <div class='input-spacer'></div>
+                        <div class='fpos-line'>
+                            <p class='fpos-label'>Rotation</p>
+                            <input id='rotation' class='fpos-number' type="number" value="0" onfocus="this.value=''">
+                        </div>
+                    </div>
+
+                    <div class='frame-position-col'>
+                    
+                        <div class='fpos-line'>
+                            <p class='fpos-label'>Y-Offset</p>
+                            <input id='y-Offset' class='fpos-number' type="number" value="0" onfocus="this.value=''">
+                        </div>
+                        <div class='input-spacer'></div>
+                        <div class='fpos-line'>
+                            <p class='fpos-label'>Y Scale</p>
+                            <input id='yScale' class='fpos-number' type="number" value="1" onfocus="this.value=''">
+                        </div>
+                        <div class='input-spacer'></div>
+                        <div class='fpos-line'>
+                            <p class='fpos-label'>Alpha</p>
+                            <input id='alpha' class='fpos-number' type="number" value="1" onfocus="this.value=''" onfocusout="checkAlpha()">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class='submit-gif-container'>
+                    <button class='browse-button' onclick='go()'>Import GIFS</button>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div id='progress-bar-container'>
+            <div class='progess-message'>
+                <p id='gif-import-text' class='pc-box-header'>0/0 GIFS imported</p>
+                <div class='progress-row'>
+                    <div class='progress-built'>
+                        <p id='progress-percent' class='desc progress-number'>0%</p>
+                    </div>
+                    <div class='progress-gauge'>
+                        <div id='progress-fill' class='progress-fill'></div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div id='stats-container'>
+            <div class='stats'>
+                <p class='pc-box-header stats-header'>Statistics</p>
+                <div class='stats-breakdown'>
+                    <div class='stats-row'>
+                        <p>GIFs Imported: </p>
+                        <p id='gifs-imported'>0</p>
+                    </div>
+                    <div class='stats-row'>
+                        <p>Frames Imported: </p>
+                        <p id='frames-imported'>0</p>
+                    </div>
+                    <div class='stats-row'>
+                        <p>Time to complete</p>
+                        <p id='completion-time'>0</p>
+                    </div>
+                   
+                </div>
+            </div>
+            <br>
+            <button class='browse-button' onclick='complete()'>Continue</button>
+        </div>
+        
+        <div id="error-overlay">
+            <div class="error-message">
+                <h2>Buh, we got an issue :(</h2>
+                <p id='error-message'>Please enter a GIF path!</p>
+                <button id="close-overlay">Close</button>
+            </div>
+        </div>
+        
+        <script>
+            var gifFolder = '';
+            var newSpriteFolder = '';
+            var entityPath = '';
+            var xOffset = 0;
+            var yOffset = 0;
+            var xScale = 1;
+            var yScale = 1;
+            var rotation = 0;
+            var alpha = 1;
+            var totalGifs = '';
+            var gifsCompleted = 0;
+            
+            const { ipcRenderer } = require('electron');
+            
+
+            document.getElementById('close-overlay').addEventListener('click', function() {
+                document.getElementById('error-overlay').style.display = 'none';
+                document.getElementById('progress-bar-container').classList.remove('show-progress');
+                setTimeout(() => document.getElementById('user-form').classList.remove('hide-gif'), 1000);
+                
+            });
+            
+            function checkAlpha() {
+                var alphaNum = document.getElementById('alpha');
+                var alphaFloat = parseFloat(alphaNum.value);
+                
+                if (alphaFloat > 1) {
+                    alphaNum.value = 1;
+                } else if (alphaFloat < 0) {
+                    alphaNum.value = 0;
+                }
+            }
+
+            function openFolderDialog(id) {
+              ipcRenderer.invoke('open-folder-dialog')
+                .then((filePaths) => {
+                  console.log('Selected file paths:', filePaths);
+                  if (filePaths != undefined) {
+                      document.getElementById(id).innerHTML = filePaths;
+                  }
+                  
+                })
+                .catch((error) => {
+                  console.error('Error opening file dialog:', error);
+                });
+            }
+            
+            
+            function openFileDialog(id) {
+              ipcRenderer.invoke('open-file-dialog')
+                .then((filePaths) => {
+                  console.log('Selected file paths:', filePaths);
+                  document.getElementById(id).innerHTML = filePaths;
+                })
+                .catch((error) => {
+                    console.error('Error opening file dialog:', error);
+                    document.getElementById('progress-bar-container').classList.remove('show-progress');
+                    setTimeout(() => document.getElementById('user-form').classList.remove('hide-gif'), 1000);
+                });
+            }
+            
+            async function go() {
+                gifFolder = document.getElementById('gifPath').innerHTML;
+                newSpriteFolder = document.getElementById('newSpritesPath').innerHTML;
+                entityPath = document.getElementById('entityPath').innerHTML;
+                xOffset = document.getElementById('x-Offset').value;
+                yOffset = document.getElementById('y-Offset').value;
+                xScale = document.getElementById('xScale').value;
+                yScale = document.getElementById('yScale').value;
+                rotation = document.getElementById('rotation').value;
+                alpha = document.getElementById('alpha').value;
+                
+                if (gifFolder == '') {
+                    document.getElementById('error-message').innerHTML = 'Please select a folder for GIFS!';
+                    document.getElementById('error-overlay').style.display = 'block';
+                } else if (newSpriteFolder == '') {
+                    document.getElementById('error-message').innerHTML = 'Please select a folder for the new sprites to be placed in!';
+                    document.getElementById('error-overlay').style.display = 'block';
+                } else if (entityPath == '') {
+                    document.getElementById('error-message').innerHTML = 'Please select an entity path!'
+                    document.getElementById('error-overlay').style.display = 'block';
+                } else {
+                    document.getElementById('user-form').classList.add('hide-gif');
+                    setTimeout(() => document.getElementById('progress-bar-container').classList.add('show-progress'), 1000);
+
+
+                    
+                    try {
+                        const result = await ipcRenderer.invoke('run-gif-import', [gifFolder,newSpriteFolder,entityPath,xOffset,yOffset,xScale,yScale,rotation,alpha]);
+                        console.log('This was the result');
+                        //console.log(result);
+                    } catch (error) {
+                        document.getElementById('error-message').innerHTML = 'Python Error:<br>'+error+'<br>Send error to ZardyZ in Discord';
+                        document.getElementById('error-overlay').style.display = 'block';
+                        
+
+                    }
+                }
+                
+            }
+            
+            ipcRenderer.on('progress-update', (event, message) => {
+                console.log(message);
+                if (message.includes('Total GIFS: ')) {
+                    totalGifs = message.split('Total GIFS: ')[1];
+                    console.log(totalGifs);
+                    document.getElementById('gif-import-text').innerHTML = '0/'+totalGifs+' GIFS imported';
+                    document.getElementById('progress-fill').style.width = '0px';
+                    document.getElementById('progress-percent').innerHTML = '0%';
+                    
+                } else if (message.includes('GIF DONE')) {
+                    gifsCompleted += 1
+                    console.log(gifsCompleted);
+                    document.getElementById('gif-import-text').innerHTML = gifsCompleted+'/'+totalGifs+' GIFS imported';
+                    document.getElementById('progress-fill').style.width = 400 * (gifsCompleted/totalGifs)+'px';
+                    document.getElementById('progress-percent').innerHTML = Math.round(100*(gifsCompleted/totalGifs))+'%';
+                    
+                } else if (message.includes('STATS: ')) {
+                    
+                    message = message.replace('STATS: ','');
+                    var content = message.split(',');
+                    document.getElementById('gifs-imported').innerHTML = content[0];
+                    document.getElementById('frames-imported').innerHTML = content[1];
+                    document.getElementById('completion-time').innerHTML = content[2];
+                    document.getElementById('progress-bar-container').classList.remove('show-progress');
+                    setTimeout(() => document.getElementById('stats-container').classList.add('show-progress'), 1000);
+                    
+                } else if (message.includes('Success')) {
+                    console.log('We win');
+                }
+                
+            });
+            
+            function complete() {
+                document.getElementById('gifPath').innerHTML = '';
+                document.getElementById('newSpritesPath').innerHTML = '';
+                document.getElementById('entityPath').innerHTML = '';
+                gifFolder = '';
+                newSpritesPath = '';
+                entityPath = '';
+                document.getElementById('stats-container').classList.remove('show-progress');
+                setTimeout(() => document.getElementById('user-form').classList.remove('hide-gif'), 1000);
+            }
+        
+        </script>
+    
+    </body>
+</html>

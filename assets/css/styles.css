@@ -1,0 +1,328 @@
+/* styles.css */
+
+/* Fonts */
+@font-face {
+  font-family: Centie;
+  src: url("../fonts/CentieSans.ttf");
+}
+
+@font-face {
+  font-family: Edit Undo;
+  src: url("../fonts/editundo.ttf");
+}
+
+@font-face {
+  font-family: VCR;
+  src: url("../fonts/VCR.ttf");
+}
+
+
+html {
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    background: rgb(57,11,83);
+    background: linear-gradient(0deg, rgba(57,11,83,1) 0%, rgba(34,193,195,1) 100%);
+    /*
+    background-image: url('lol.png');
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-position:center center;
+    background-repeat: no-repeat;
+    */
+    margin:0;
+    padding:0;
+    height: 100%;
+    width: 100%;
+}
+
+.anton-regular {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.header {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+
+.header-text-cont {
+    width: 400px;
+    background: white;
+    color: black;
+    border: solid white 3px;
+    border-radius: 5px;
+}
+
+.header-text {
+    font-family: Centie;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom:10px;
+}
+
+.program-chooser {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100vw;
+    -webkit-transition: scale 1s ease-out;
+    -moz-transition: scale 1s ease-out;
+    -o-transition: scale 1s ease-out;
+    -ms-transition: scale 1s ease-out;
+    transition: scale 1s ease-out;
+}
+
+.pc-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.pc-box {
+    margin: 10px 10px 10px 10px;
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 200px;
+    max-height: 200px;
+    text-align: center;
+    border: solid white 3px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.pc-box * {
+    pointer-events: none;
+}
+
+.kohaku {
+    margin-top:auto;
+}
+
+.gif-hide {
+    opacity:0;
+    -webkit-transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+    -ms-transition: opacity .5s ease-out;
+    transition: opacity .5s ease-out;
+}
+
+.gif-show {
+    opacity:1;
+}
+
+.pc-box-header {
+    font-family: Centie;
+    color:white;
+    font-size: 22px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    text-align: center;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    
+}
+
+.input-column {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    width: 50vw;
+    min-width: 600px;
+    border: solid 3px;
+    border-radius: 5px;
+}
+
+.input-label {
+    margin: 0;
+    font-size: 20px;
+}
+
+.browse-button {
+    border: solid white  3px;
+    border-radius: 5px;
+    background: #22c375;
+    font-size: 20px;
+    transition: background-color 0.5s ease;
+}
+
+.browse-button:hover {
+   background: #51E19B;
+}
+
+.desc {
+    font-family: Rubik;
+    color:white;
+    font-size: 18px;
+}
+
+.p-hover {
+    background: linear-gradient(0deg, #FFFFFF, #FFFFFF) no-repeat right bottom / 0 var(--bg-h);
+    transition: background-size 350ms;
+    padding-bottom: 2px;
+    --bg-h: 2px;
+}
+    
+.p-hover-anim {
+    background-size: 100% var(--bg-h);
+    background-position-x: left; 
+}
+    
+.faded {
+    opacity: 50%;
+}
+
+.container p {
+    text-decoration: none !important;
+    color: #00688c;
+    line-height: 1.25;
+}
+
+.container p:visited {
+    color:#00688c;
+}
+
+.gear-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.gear-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+}
+
+.g-desc {
+    display:fixed;
+    opacity:0;
+    font-weight: bold;
+    color:white;
+    font-size: 20px;
+    margin-bottom: 0px;
+    -webkit-transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+    -ms-transition: opacity .5s ease-out;
+    transition: opacity .5s ease-out;
+}
+
+.g-desc-show {
+    opacity: 1;
+}
+
+.settings-gear {
+    width: 50px;
+    z-index: 1;
+}
+
+.settings-gear-hide {
+    display: none;
+}
+
+.settings-gear-center {
+    top: 50%;
+    left: 50%;
+    position: fixed; 
+    /*transform: translate(-50vw, 50vh);*/
+    -webkit-transition: transform 1s ease-in-out;
+    -moz-transition:transform 1s ease-in-out;
+    -ms-transition:transform 1s ease-in-out;
+}
+
+.scale-out {
+    transform: scale(0.0);
+    -webkit-transition: transform 1.05s ease-in-out;
+    -moz-transition:transform 1.05s ease-in-out;
+    -ms-transition:transform 1.05s ease-in-out;
+    
+    /*
+    transform: rotate3d(0, 0, 0, 90deg);
+    -webkit-transition: transform 1.05s ease-in-out;
+    -moz-transition: transform 1.05s ease-in-out;
+    -ms-transition: transform 1.05s ease-in-out;
+    */
+}
+
+.all-content {
+    opacity: 1;
+    -webkit-transition: opacity .75s ease;
+    -moz-transition: opacity .75s ease;
+    -o-transition: opacity .75s ease;
+    -ms-transition: opacity .75s ease;
+    transition: opacity .75s ease;
+}
+
+.all-content-hide {
+    opacity: 0;
+}
+
+
+.settings-hide {
+    color: white;
+    display: none;
+    font-size: 30px;
+    opacity: 0;
+    -webkit-transition: transform, opacity 0, 1s ease;
+    -moz-transition: transform, opacity 0, 1s ease;
+    -o-transition: transform, opacity 0, 1s ease;
+    -ms-transition: transform, opacity 0, 1s ease;
+    transition: transform, opacity 0, 1s ease;
+}
+
+.settings-show {
+    display: flex;
+    position: fixed;
+    opacity: 1;
+    top: 50%;
+    left: 50%;
+    text-align:center;
+    transform: translate(-50%, -50%);
+    
+}
+
+
+/* Add styles here to customize the appearance of your app */
