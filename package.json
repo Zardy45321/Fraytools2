@@ -10,7 +10,7 @@
   "author": "Zardy45321",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^29.2.0",
+    "electron": "^31.0.1",
     "electron-builder": "^25.0.0-alpha.9",
     "electron-packager": "^17.1.2"
   },
